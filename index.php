@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
+    <link rel="stylesheet" href="assets/extensions/toastify-js/src/toastify.css" class="rel">
     <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/png">
 
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-<?php 
+    <?php 
 session_start();
 $username = $_SESSION['username'];
 $nama_user = $_SESSION['nama_user'];
@@ -137,6 +138,11 @@ if($_SESSION['status'] != "login"){
                 </div>
             </div>
             <div id="main">
+                <header class="mb-5">
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </header>
                 <?php if (isset($_GET['page'])) {
                         $page = $_GET['page'];
                         switch ($page) {
@@ -156,24 +162,6 @@ if($_SESSION['status'] != "login"){
                 }?>
             </div>
         </div>
-        <script type="text/javascript">
-            function swalLogout(){
-                Swal.fire({
-                title: "Logout",
-                text: "Apakah Kamu Ingin Logout?",
-                icon: "warning",
-                showConfirmButton: true,
-                confirmButtonText: "Logout",
-                confirmButtonColor: '#42ba96',
-                showCancelButton: true,
-                cancelButtonText: "Batal",
-                cancelButtonColor: '#DC3545',
-            }).then((response)=> {
-                if(response.value){
-                    window.location.href = "auth/logout.php"
-                }
-            })}
-        </script>
         <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/script.js"></script>
@@ -181,11 +169,88 @@ if($_SESSION['status'] != "login"){
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
         <script src="assets/js/pages/datatables.js"></script>
+        <script src="assets/extensions/toastify-js"></script>
         <!-- Need: Apexcharts -->
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
         <script src="assets/js/pages/dashboard.js"></script>
         <script src="assets/extensions/parsleyjs/parsley.min.js"></script>
         <script src="assets/js/pages/parsley.js"></script>
+        <script src="assets/extensions/toastify-js/src/toastify.js"></script>
+        <script>
+
+            function previewImage() {
+                const image = document.querySelector('#image');
+                const imgPreview = document.querySelector('.img-preview');
+
+                imgPreview.style.display = 'block';
+
+                const oFReader = new FileReader();
+                oFReader.readAsDataURL(image.files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    imgPreview.src = oFREvent.target.result;
+                }
+
+            }
+
+            function swalLogout() {
+                Swal.fire({
+                    title: "Logout",
+                    text: "Apakah Kamu Ingin Logout?",
+                    icon: "warning",
+                    showConfirmButton: true,
+                    confirmButtonText: "Logout",
+                    confirmButtonColor: '#42ba96',
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    cancelButtonColor: '#DC3545',
+                }).then((response) => {
+                    if (response.value) {
+                        window.location.href = "auth/logout.php"
+                    }
+                })
+            }
+
+            function swalDelete(link) {
+                Swal.fire({
+                    title: "Hapus",
+                    text: "Apakah Kamu Yakin Ingin Menghapus Data Ini?",
+                    icon: "warning",
+                    showConfirmButton: true,
+                    confirmButtonText: "Hapus",
+                    confirmButtonColor: '#42ba96',
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    cancelButtonColor: '#DC3545',
+                }).then((response) => {
+                    if (response.value) {
+                        window.location.href = link
+                    }
+                })
+            }
+            
+            $(".btn-collapse").click(function () {
+                const collapseId = $(this).attr("href")
+                if ($(this).children("span").html() == 'Open Form') {
+                    $(this).children("span").html('Close Form');
+                } else {
+                    $(this).children("span").html('Open Form');
+                }
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+
     </body>
 
 </html>
