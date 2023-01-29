@@ -1,3 +1,82 @@
+<?php
+$toastify = '<script src="assets/extensions/toastify-js/src/toastify.js"></script>';
+if(isset($_SESSION['simpan_barang'])){
+    if($_SESSION['simpan_barang'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Disimpan!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['simpan_barang']);
+    }else if($_SESSION['simpan_barang'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Disimpan!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['simpan_barang']);
+    }
+}
+if(isset($_SESSION['update_barang'])){
+    if($_SESSION['update_barang'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Diupdate!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['update_barang']);
+    }else if($_SESSION['update_barang'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Diupdate!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['update_barang']);
+    }
+}
+if(isset($_SESSION['delete_barang'])){
+    if($_SESSION['delete_barang'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Dihapus!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['delete_barang']);
+    }else if($_SESSION['delete_barang'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Dihapus!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['delete_barang']);
+    }
+}
+
+?>
 <div class="card">
     <section id="">
         <div class="row ">
@@ -72,7 +151,7 @@
                                             <img class="img-preview img-fluid col-sm-5">
                                         </div>
                                     </div>
-                                    <div class="col-12 d-flex justify-content-end mt-3">
+                                    <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">
                                             Submit
                                         </button>

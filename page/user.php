@@ -1,4 +1,82 @@
-<div class="card">
+<?php
+$toastify = '<script src="assets/extensions/toastify-js/src/toastify.js"></script>';
+if(isset($_SESSION['simpan_user'])){
+    if($_SESSION['simpan_user'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Disimpan!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['simpan_user']);
+    }else if($_SESSION['simpan_user'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Disimpan!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['simpan_user']);
+    }
+}
+if(isset($_SESSION['update_user'])){
+    if($_SESSION['update_user'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Diupdate!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['update_user']);
+    }else if($_SESSION['update_user'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Diupdate!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['update_user']);
+    }
+}
+if(isset($_SESSION['delete_user'])){
+    if($_SESSION['delete_user'] === "sukses"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Berhasil Dihapus!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['delete_user']);
+    }else if($_SESSION['delete_user'] === "gagal"){
+        echo'
+        '.$toastify.'
+        <script>
+        Toastify({
+            text: "Data Gagal Dihapus!!",
+            duration: 3000,
+            close: true,
+        }).showToast();
+        </script>';
+        unset($_SESSION['delete_user']);
+    }
+}
+
+?><div class="card">
     <section id="">
         <div class="row ">
             <div class="col-12">
@@ -292,6 +370,7 @@
                                                             <button type="reset"
                                                                 class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                         </div>
+
                                                 </div>
 
                                             </div>
@@ -306,12 +385,11 @@
                 </div>
             </div>
         </div>
+        <?php  
+        //var_dump($_SESSION['simpan_user']);
+        //var_dump($_SESSION['update_user']);
+        //var_dump($_SESSION['delete_user']); 
+        ?> 
 </div>
 </section>
 </div>
-
-<script>
-    function btnReset() {
-        document.getElementbyId("form").reset()
-    }
-</script>

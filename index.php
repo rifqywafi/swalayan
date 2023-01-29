@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swalayan </title>
-
+    <link rel="stylesheet" href="assets/css/style.css" class="rel">
     <link rel="stylesheet" href="assets/css/main/app.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/pages/datatables.css" class="rel">
+    <link rel="stylesheet" href="assets/extensions/@fortawesome/fontawesome-free/css/all.css" class="rel">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
     <link rel="stylesheet" href="assets/extensions/toastify-js/src/toastify.css" class="rel">
+    <link rel="stylesheet" href="assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.css" class="rel">
+    <link rel="stylesheet" href="assets/extensions/sweetalert2/sweetalert2.css" class="rel">
     <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/png">
 
@@ -24,8 +25,11 @@
 session_start();
 $username = $_SESSION['username'];
 $nama_user = $_SESSION['nama_user'];
-if($_SESSION['status'] != "login"){
+if(!isset($_SESSION['status'])){
     header("location:auth/login.php?pesan=belum_login");
+};
+if(isset($_GET["page"])){
+    $page = $_GET["page"];
 }
 ?>
 
@@ -97,37 +101,37 @@ if($_SESSION['status'] != "login"){
                     <div class="sidebar-menu">
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if(!$page){echo 'active';} ?>">
                                 <a href="index.php" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if($page == "master"){echo 'active';} ?>">
                                 <a href="index.php?page=master" class='sidebar-link'>
                                     <i class="bi bi-key-fill"></i>
                                     <span>Master</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if($page == "user"){echo 'active';} ?>">
                                 <a href="index.php?page=user" class='sidebar-link'>
                                     <i class="bi bi-person-fill"></i>
                                     <span>User</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if($page == "pelanggan"){echo 'active';} ?>">
                                 <a href="index.php?page=pelanggan" class='sidebar-link'>
                                     <i class="bi bi-people-fill"></i>
                                     <span>Pelanggan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if($page == "barang"){echo 'active';} ?>">
                                 <a href="index.php?page=barang" class='sidebar-link'>
                                     <i class="bi bi-box-fill"></i>
                                     <span>Barang</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item <?php if($page == "transaksi"){echo 'active';} ?>">
                                 <a href="index.php?page=transaksi" class='sidebar-link'>
                                     <i class="bi bi-currency-dollar"></i>
                                     <span>Transaksi</span>
@@ -138,7 +142,7 @@ if($_SESSION['status'] != "login"){
                 </div>
             </div>
             <div id="main">
-                <header class="mb-5">
+                <header class="mb-2">
                     <a href="#" class="burger-btn d-block d-xl-none">
                         <i class="bi bi-justify fs-3"></i>
                     </a>
@@ -159,23 +163,23 @@ if($_SESSION['status'] != "login"){
                                 include 'page/transaksi.php';
                                 break;
                         }
-                }?>
+            }?>
             </div>
         </div>
         <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/app.js"></script>
         <script src="assets/js/script.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
         <script src="assets/js/pages/datatables.js"></script>
-        <script src="assets/extensions/toastify-js"></script>
+        <script src="assets/extensions/jquery/jquery.js"></script>
+        <script src="assets/js/extensions/datatables.js"></script>
+        <script src="assets/extensions/sweetalert2/sweetalert2.all.js"></script>
+        <script src="assets/extensions/toastify-js/src/toastify.js"></script>
+        <script src="assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.js"></script>
         <!-- Need: Apexcharts -->
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
         <script src="assets/js/pages/dashboard.js"></script>
         <script src="assets/extensions/parsleyjs/parsley.min.js"></script>
         <script src="assets/js/pages/parsley.js"></script>
-        <script src="assets/extensions/toastify-js/src/toastify.js"></script>
         <script>
 
             function previewImage() {
@@ -204,6 +208,10 @@ if($_SESSION['status'] != "login"){
                     showCancelButton: true,
                     cancelButtonText: "Batal",
                     cancelButtonColor: '#DC3545',
+                    customClass: {
+                        confirmButton: 'me-1',
+                        cancelButton: 'ms-1',
+                    }
                 }).then((response) => {
                     if (response.value) {
                         window.location.href = "auth/logout.php"
@@ -222,6 +230,10 @@ if($_SESSION['status'] != "login"){
                     showCancelButton: true,
                     cancelButtonText: "Batal",
                     cancelButtonColor: '#DC3545',
+                    customClass: {
+                        confirmButton: 'me-1',
+                        cancelButton: 'ms-1',
+                    }
                 }).then((response) => {
                     if (response.value) {
                         window.location.href = link
@@ -233,22 +245,10 @@ if($_SESSION['status'] != "login"){
                 const collapseId = $(this).attr("href")
                 if ($(this).children("span").html() == 'Open Form') {
                     $(this).children("span").html('Close Form');
-                } else {
+                } else {    
                     $(this).children("span").html('Open Form');
                 }
             });
-
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
         </script>
 
     </body>
