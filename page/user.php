@@ -9,6 +9,9 @@ if(isset($_SESSION['simpan_user'])){
             text: "Data Berhasil Disimpan!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['simpan_user']);
@@ -20,6 +23,9 @@ if(isset($_SESSION['simpan_user'])){
             text: "Data Gagal Disimpan!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['simpan_user']);
@@ -34,6 +40,9 @@ if(isset($_SESSION['update_user'])){
             text: "Data Berhasil Diupdate!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['update_user']);
@@ -45,6 +54,9 @@ if(isset($_SESSION['update_user'])){
             text: "Data Gagal Diupdate!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['update_user']);
@@ -59,6 +71,9 @@ if(isset($_SESSION['delete_user'])){
             text: "Data Berhasil Dihapus!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['delete_user']);
@@ -70,6 +85,9 @@ if(isset($_SESSION['delete_user'])){
             text: "Data Gagal Dihapus!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['delete_user']);
