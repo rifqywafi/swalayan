@@ -189,10 +189,10 @@
                     </div>
                     <div class="card-body">
                         <div class="row mt-3">
-                            <a href="index.php?page=user" class="btn-md btn btn-primary col-sm-5">
+                            <a href="index.php?page=user" class="btn-md btn btn-primary col-sm-6">
                                 <i class="bi bi-person-fill me-2"></i>User
                             </a>
-                            <a href="index.php?page=barang" class="btn-md btn btn-primary offset-md-2 col-sm-5">
+                            <a href="index.php?page=barang" class="btn-md btn btn-primary col-sm-6">
                                 <i class="bi bi-box-fill me-2"></i>Barang
                             </a>
                         </div>

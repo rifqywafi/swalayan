@@ -9,6 +9,9 @@ if(isset($_SESSION['simpan_barang'])){
             text: "Data Berhasil Disimpan!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['simpan_barang']);
@@ -20,6 +23,9 @@ if(isset($_SESSION['simpan_barang'])){
             text: "Data Gagal Disimpan!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['simpan_barang']);
@@ -34,6 +40,9 @@ if(isset($_SESSION['update_barang'])){
             text: "Data Berhasil Diupdate!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['update_barang']);
@@ -45,6 +54,9 @@ if(isset($_SESSION['update_barang'])){
             text: "Data Gagal Diupdate!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['update_barang']);
@@ -59,6 +71,9 @@ if(isset($_SESSION['delete_barang'])){
             text: "Data Berhasil Dihapus!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#5cb85c",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['delete_barang']);
@@ -70,6 +85,9 @@ if(isset($_SESSION['delete_barang'])){
             text: "Data Gagal Dihapus!!",
             duration: 3000,
             close: true,
+            style: {
+                background: "#d9534f",
+            }
         }).showToast();
         </script>';
         unset($_SESSION['delete_barang']);
@@ -104,7 +122,7 @@ if(isset($_SESSION['delete_barang'])){
                                                 $id_barang = $data['idterbesar'];
                                                 $urutan = (int) substr($id_barang, 3, 3);
                                                 $urutan++;
-                                                $huruf = "USR";
+                                                $huruf = "BRG";
                                                 $idbarang = $huruf . sprintf("%03s", $urutan);
                                             ?>
                                             <input type="text" id="id_barang" class="form-control"

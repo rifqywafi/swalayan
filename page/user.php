@@ -168,7 +168,7 @@ if(isset($_SESSION['delete_user'])){
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
-                                        <label for="no_hp">No HP</label>
+                                        <label for="no_hp">No Hp</label>
                                         <div class="form-group position-relative has-icon-left">
                                             <input type="text" id="no_hp" class="form-control" name="no_hp"
                                                 placeholder="No. HP" required />

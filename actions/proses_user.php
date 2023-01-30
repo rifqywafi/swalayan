@@ -1,7 +1,5 @@
 <?php
 include '../databases/koneksi.php';
-include '../layouts/header.php';
-include '../layouts/footer.php';
 
 $aksi = $_GET['aksi'];
 switch($aksi){
