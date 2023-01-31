@@ -160,7 +160,7 @@ if (isset($_SESSION['delete_pelanggan'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 d-flex justify-content-end">
+                                    <div class="col-12 d-flex mt-3 justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">
                                             Submit
                                         </button>

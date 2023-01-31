@@ -182,28 +182,7 @@
                         </ol>
                     </nav>
                 </header>
-                <?php if(!isset($page)) { ?>
-                <div class="card col-md-4">
-                    <div class="card-header fs-4 border-bottom">
-                        Data Master
-                    </div>
-                    <div class="card-body">
-                        <div class="row mt-3">
-                            <a href="index.php?page=user" class="btn-md btn btn-primary col-sm-6">
-                                <i class="bi bi-person-fill me-2"></i>User
-                            </a>
-                            <a href="index.php?page=barang" class="btn-md btn btn-primary col-sm-6">
-                                <i class="bi bi-box-fill me-2"></i>Barang
-                            </a>
-                        </div>
-                        <div class="row mt-3">
-                            <a href="index.php?page=pelanggan" class="btn-md btn btn-primary col-sm-12">
-                                <i class="bi bi-people-fill me-2"></i>Pelanggan
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
+                <!--  -->
                 <?php if (isset($page)) {
                     switch ($page) {
                         case 'user':
@@ -316,8 +295,27 @@
             //             background: "#5cb85c",
             //         }
             //     }).showToast();
-            // }
+            // }    
+            function removeRupiah(value) {
+                value.replace(/[0-9]/, "")
+            }
 
+            function formatRupiah(angka, prefix) {
+                var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                // tambahkan titik jika yang di input sudah menjadi angka ribuan
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+            }
             $(".btn-collapse").click(function() {
                 const collapseId = $(this).attr("href")
                 if ($(this).children("span").html() == 'Open Form') {
