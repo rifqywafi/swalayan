@@ -141,7 +141,7 @@ if(isset($_SESSION['delete_barang'])){
                                         <div class="form-group">
                                             <label for="harga">Harga</label>
                                             <div class="form-group position-relative has-icon-left">
-                                                <input type="text" id="harga" class="form-control" placeholder="Harga"
+                                                <input type="text" oninput="rupiah(JSON.stringify(this.value))" value="" id="harga" class="form-control" placeholder="Harga"
                                                     name="harga" required />
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-currency-dollar"></i>

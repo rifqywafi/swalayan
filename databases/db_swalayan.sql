@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Jan 2023 pada 09.01
+-- Waktu pembuatan: 08 Feb 2023 pada 08.08
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -32,15 +32,16 @@ CREATE TABLE `barang` (
   `nama_barang` varchar(50) NOT NULL,
   `harga` int(100) NOT NULL,
   `stok` int(100) NOT NULL,
-  `gambar` varchar(255) NOT NULL
+  `gambar` varchar(255) NOT NULL,
+  `tanggal_masuk` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `gambar`) VALUES
-('BRG001', 'sadsa', 222222, 2119, '330428609_master_4X8jiQ0q78_1056_cristiano_ronaldo_menangis_usai_portugal_tersingkir_dari_piala_dunia_2022.jfif');
+INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `gambar`, `tanggal_masuk`) VALUES
+('BRG002', 'qwe', 12000, 12, '1268973101_5LYzTBVoS196gvYvw3zjwKRLzQoLuQLfmgAyPvDTDFY.jpg', '2023-02-08 06:26:38');
 
 -- --------------------------------------------------------
 
@@ -49,10 +50,10 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `gambar`) VAL
 --
 
 CREATE TABLE `pelanggan` (
-  `id_pelanggan` varchar(5) NOT NULL,
+  `id_pelanggan` varchar(10) NOT NULL,
   `nama_pelanggan` varchar(50) NOT NULL,
   `jenis_kelamin` varchar(50) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
   `no_hp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -61,7 +62,8 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `alamat`, `no_hp`) VALUES
-('PLG00', 'rifqy', 'Laki-Laki', 'tes', '08212132');
+('PEL001', 'tes', 'Perempuan', 'jauhsekali', '12345'),
+('PEL002', 'tes2', 'Perempuan', 'dekat', '082222');
 
 -- --------------------------------------------------------
 
@@ -72,7 +74,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `ala
 CREATE TABLE `transaksi` (
   `id_transaksi` varchar(10) NOT NULL,
   `id_pelanggan` varchar(10) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` datetime NOT NULL,
   `id_barang` varchar(10) NOT NULL,
   `jumlah` int(100) NOT NULL,
   `total` int(100) NOT NULL,
@@ -84,19 +86,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tanggal`, `id_barang`, `jumlah`, `total`, `id_user`) VALUES
-('TRS00', 'PLG00', '2023-01-31', 'BRG001', 2, 444444, 'USR001');
-
---
--- Trigger `transaksi`
---
-DELIMITER $$
-CREATE TRIGGER `update_stock` AFTER INSERT ON `transaksi` FOR EACH ROW BEGIN
-    UPDATE barang
-    SET stok = stok - NEW.jumlah
-    WHERE id_barang = NEW.id_barang;
-END
-$$
-DELIMITER ;
+('TRS001', 'PEL002', '2023-02-08 10:47:16', 'BRG002', 6, 7200000, 'USR003');
 
 -- --------------------------------------------------------
 
@@ -118,7 +108,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `username`, `password`, `no_hp`) VALUES
-('USR001', 'Rifqy Wafianerdza', 'Laki-Laki', 'rifqy123', '123', '082121121');
+('USR002', 'User', 'Laki-laki', 'User', 'User', '0812'),
+('USR003', 'qwe', 'Laki-laki', 'qwe', 'qwe', '123'),
+('USR004', 'wer', 'Laki-Laki', 'wer', '1313', '123123'),
+('USR005', 'asdasd', 'Laki-Laki', 'asdsad', '234', '123123');
 
 -- --------------------------------------------------------
 
@@ -129,7 +122,7 @@ INSERT INTO `user` (`id_user`, `nama_user`, `jenis_kelamin`, `username`, `passwo
 CREATE TABLE `v_transaksi` (
 `id_transaksi` varchar(10)
 ,`nama_pelanggan` varchar(50)
-,`tanggal` date
+,`tanggal` datetime
 ,`nama_barang` varchar(50)
 ,`jumlah` int(100)
 ,`total` int(100)
@@ -166,9 +159,9 @@ ALTER TABLE `pelanggan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_pelanggan` (`id_pelanggan`),
-  ADD KEY `id_barang` (`id_barang`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_pelanggan` (`id_pelanggan`,`id_barang`,`id_user`) USING BTREE,
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_barang` (`id_barang`);
 
 --
 -- Indeks untuk tabel `user`
@@ -184,9 +177,9 @@ ALTER TABLE `user`
 -- Ketidakleluasaan untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`),
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

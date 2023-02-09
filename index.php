@@ -197,6 +197,13 @@
                         case 'transaksi':
                             include 'page/transaksi.php';
                             break;
+                        case 'cetak':
+                            include 'page/cetak.php';
+                        break;
+                        default:
+                            echo '<script>
+                            window.location.href = "404.php"
+                            </script>';
                     }
                 } ?>
             </div>
@@ -293,7 +300,7 @@
                     $(this).children("span").html('Open Form');
                 }
             });
-            $("[type='number']").keypress(function(evt) {
+            $("#jumlah").keypress(function(evt) {
                 evt.preventDefault();
             });
         </script>
