@@ -8,12 +8,14 @@
         #content * {
             visibility: visible;
         }
+
         #content {
             position: absolute;
             left: 25%;
             top: 25%;
-            margin:0;
+            margin: 0;
         }
+
         #buttonprint {
             display: none;
         }
@@ -33,7 +35,7 @@ $row = mysqli_fetch_array($query2);
         <h4 class="card-title">
             Super Market
         </h4>
-        <img class=" rounded-circle" src="assets/images/barca.png" width="100px" height="100px"/>
+        <img class=" rounded-circle" src="assets/images/barca.png" width="100px" height="100px" />
         <div class="card-text"><br>
             JL.Harapan No.2
             <hr>
@@ -56,7 +58,9 @@ $row = mysqli_fetch_array($query2);
                 </tr>
                 <tr>
                     <td class="text-end" colspan="3">Total : </td>
-                    <td>Rp. <?php echo $row['total'] ?></td>
+                    <td id="total-belanja">
+                        <div id="isi-total"><?php echo $row['total'] ?></div>
+                    </td>
                 </tr>
             </table>
             <hr>

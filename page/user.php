@@ -411,3 +411,78 @@ if(isset($_SESSION['delete_user'])){
 </div>
 </section>
 </div>
+<script>
+    // const getSimpan = sessionStorage.getItem("simpan")
+    // const getUpdate = sessionStorage.getItem("update")
+    // const getDelete = sessionStorage.getItem("delete")
+
+    // const removeSimpan = sessionStorage.removeItem("simpan")
+    // const removeUpdate = sessionStorage.removeItem("update")
+    // const removeDelete = sessionStorage.removeItem("delete")
+    
+    // if(getSimpan == "sukses"){
+    //     Toastify({
+    //         text: "Data Berhasil Disimpan!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#5cb85c",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }else if(getSimpan = "gagal"){
+    //     Toastify({
+    //         text: "Data Gagal Disimpan!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#d9534f",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }
+
+    // if(getUpdate == "sukses"){
+    //     Toastify({
+    //         text: "Data Berhasil Diupdate!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#5cb85c",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }else if(getUpdate = "gagal"){
+    //     Toastify({
+    //         text: "Data Gagal Diupdate!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#d9534f",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }
+
+    // if(getDelete == "sukses"){
+    //     Toastify({
+    //         text: "Data Berhasil Diupdate!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#5cb85c",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }else if(getUpdate = "gagal"){
+    //     Toastify({
+    //         text: "Data Gagal Diupdate!!",
+    //         duration: 3000,
+    //         close: true,
+    //         style: {
+    //             background: "#d9534f",
+    //         }
+    //     }).showToast();
+    //     removeSimpan
+    // }
+</script>

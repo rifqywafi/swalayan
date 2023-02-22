@@ -36,7 +36,6 @@ switch($aksi){
       ;
     };
     break;
-    break;
 
   case 'update':
     $rand = rand();

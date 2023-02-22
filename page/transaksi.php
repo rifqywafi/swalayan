@@ -207,7 +207,7 @@ if (isset($_SESSION['delete_transaksi'])) {
                                         <div class="form-group mt-4 bg-primary rounded-2 d-none  p-2" id="keterangan">
                                             <div class="keterangan">
                                                 <div class="badge bg-primary">
-                                                    <span class=" ket-label ">Harga : </span>
+                                                    <span class=" ket-label ">Harga : Rp.</span>
                                                     <span id="harga" class=" me-1"></span>
                                                 </div>
                                                 <div class="badge bg-primary">
@@ -301,7 +301,7 @@ if (isset($_SESSION['delete_transaksi'])) {
 
     function btnReset() {
         document.getElementbyId("form").reset()
-        document.getElementById("keterangan").classList.add("d-none")
+        // document.getElementById("keterangan").classList.add("d-none")
     }
 
     function hitung() {
@@ -319,13 +319,15 @@ if (isset($_SESSION['delete_transaksi'])) {
                 }
             }).showToast()
         }
-        const hargaRemoveRupiah = harga.replace(/[^0-9]/g, "")
-        const hargaInt = parseInt(hargaRemoveRupiah);
+        // const hargaRemoveRupiah = harga.replace(/[^0-9]/g, "")
+        const hargaInt = parseInt(harga);
         var total = hargaInt * jumlahValue;
-        document.getElementById('total').value = total;
+        document.getElementById('total').value = total;                
         document.getElementById('ket_total').innerHTML = rupiah(total)
         // console.log("max = " + jumlahMax)
         // console.log("value = " + jumlahValue)
+        // console.log(hargaInt)
+        // console.log(hargaRemoveRupiah)
     }
 
     function totalRp() {
@@ -336,7 +338,7 @@ if (isset($_SESSION['delete_transaksi'])) {
         document.getElementById('jumlah').readOnly = false;
         document.getElementById('jumlah').max = dtBarang[x].stok;
         document.getElementById('keterangan').classList.remove('d-none');
-        document.getElementById('harga').innerHTML = rupiah(dtBarang[x].harga, "Rp.");
+        document.getElementById('harga').innerHTML = dtBarang[x].harga;
         document.getElementById('stok').innerHTML = dtBarang[x].stok;
     }
 </script>
